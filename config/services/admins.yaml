@@ -1,0 +1,35 @@
+services:
+    admin.celebrity:
+        class: App\Admin\CelebrityAdmin
+        arguments: [~, App\Entity\Celebrity, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Celebrities }
+        public: true
+
+    admin.representative:
+        class: App\Admin\RepresentativeAdmin
+        arguments: [~, App\Entity\Representative, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Representatives }
+        public: true
+
+    admin.celebrity.agent:
+        class: App\Admin\Celebrity\AgentAdmin
+        arguments: [~, App\Entity\Celebrity\Agent, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Agent }
+        public: true
+
+    admin.celebrity.publicist:
+        class: App\Admin\Celebrity\PublicistAdmin
+        arguments: [~, App\Entity\Celebrity\Publicist, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Publicist }
+        public: true
+
+    admin.celebrity.manager:
+        class: App\Admin\Celebrity\ManagerAdmin
+        arguments: [~, App\Entity\Celebrity\Manager, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Manager }
+        public: true
