@@ -33,3 +33,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Manager }
         public: true
+
+    admin.change_log_entry:
+        class: App\Admin\ChangeLogEntryAdmin
+        arguments: [~, App\Entity\ChangeLogEntry, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Change log }
+        public: true
