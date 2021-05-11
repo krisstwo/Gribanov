@@ -16,7 +16,7 @@ final class AgentAdmin extends AbstractAdmin
 {
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clear();
+        $collection->clearExcept(['create', 'edit', 'delete']);
     }
 
     protected function configureFormFields(FormMapper $form): void
