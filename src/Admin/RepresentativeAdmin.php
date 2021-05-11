@@ -70,13 +70,6 @@ final class RepresentativeAdmin extends AbstractAdmin
                 'allow_add' => true,
                 'allow_delete' => true,
             ])
-            ->add('agentDuties', \Sonata\Form\Type\CollectionType::class, [
-                'by_reference' => false,
-            ], [
-                'edit' => 'inline',
-                'inline' => 'table',
-                'admin_code' => 'admin.celebrity.publicist',
-            ])
         ;
     }
 
