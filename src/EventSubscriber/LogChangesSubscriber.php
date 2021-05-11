@@ -11,10 +11,17 @@ use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
+use Symfony\Component\Security\Core\Security;
 
 final class LogChangesSubscriber implements EventSubscriberInterface
 {
+    private $security;
     private $logEntries = [];
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
 
     public function getSubscribedEvents()
     {
@@ -28,12 +35,14 @@ final class LogChangesSubscriber implements EventSubscriberInterface
     {
         $entity = $eventArgs->getObject();
         $em = $eventArgs->getObjectManager();
+        $user = $this->security->getUser();
 
         if ($entity instanceof Celebrity || $entity instanceof Representative) {
             $logEntry = new ChangeLogEntry();
             $logEntry->setContext(get_class($entity));
             $logEntry->setIdentifier($entity->getId());
             $logEntry->setChangeset($eventArgs->getEntityChangeSet());
+            $logEntry->setUser($user->getUsername());
 
             $this->logEntries[] = $logEntry;
         }

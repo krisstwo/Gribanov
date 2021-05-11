@@ -38,6 +38,7 @@ final class ChangeLogEntryAdmin extends AbstractAdmin
             ->add('context')
             ->add('identifier')
             ->add('moment')
+            ->add('user')
         ;
     }
 
@@ -48,6 +49,7 @@ final class ChangeLogEntryAdmin extends AbstractAdmin
             ->add('context')
             ->add('identifier')
             ->add('moment')
+            ->add('user')
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
                     'show' => [],
@@ -64,6 +66,7 @@ final class ChangeLogEntryAdmin extends AbstractAdmin
             ->add('identifier')
             ->add('moment')
             ->add('changeset')
+            ->add('user')
         ;
     }
 }

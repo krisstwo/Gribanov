@@ -37,6 +37,11 @@ class ChangeLogEntry
      */
     private $changeset = [];
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->moment = new \DateTimeImmutable();
@@ -84,6 +89,18 @@ class ChangeLogEntry
     public function setChangeset(array $changeset): self
     {
         $this->changeset = $changeset;
+
+        return $this;
+    }
+
+    public function getUser(): ?string
+    {
+        return $this->user;
+    }
+
+    public function setUser(?string $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
