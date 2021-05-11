@@ -1,11 +1,32 @@
 security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         users_in_memory: { memory: null }
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        admin:
+            pattern: /admin(.*)
+            context: user
+            form_login:
+                provider: fos_userbundle
+                login_path: /admin/login
+                use_forward: false
+                check_path: /admin/login_check
+                failure_path: null
+            logout:
+                path: /admin/logout
+                target: /admin/login
+            anonymous: true
+
         main:
             anonymous: lazy
             provider: users_in_memory
@@ -21,3 +42,11 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+
+        # Admin login page needs to be accessed without credential
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/admin/, role: IS_AUTHENTICATED_FULLY }
