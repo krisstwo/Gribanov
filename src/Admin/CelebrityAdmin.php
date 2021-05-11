@@ -25,7 +25,7 @@ final class CelebrityAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['list', 'show', 'edit', 'delete', 'batch']);
+        $collection->clearExcept(['list', 'create', 'show', 'edit', 'delete', 'batch']);
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
