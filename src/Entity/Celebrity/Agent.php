@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=AgentRepository::class)
  */
-class Agent
+class Agent implements AttachedRepresentativeInterface
 {
     /**
      * @ORM\Id
